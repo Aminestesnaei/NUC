@@ -30,20 +30,20 @@ def decode():
     global text_decoded
     global img_f
     global image
-
-    out_text64.delete(1.0, END)
-    encoded_text = text.get(1.0, END)
+    
+    encoded_text = out_text64.get(1.0, END)
     encoded_text.encode()
     text_decoded = base64.b64decode(encoded_text).decode()
+    out_text64.delete(1.0, END)
     out_text64.insert('insert', text_decoded)
 
 
 def decode_base58():
 
-    out_text58.delete(1.0, END)
-    encoded_text = text.get(1.0, END)
+    encoded_text = out_text58.get(1.0, END)
     encoded_text.encode()
     text_decoded58 = base58.b58decode(encoded_text).decode()
+    out_text58.delete(1.0, END)
     out_text58.insert('insert', text_decoded58)
 
 
@@ -122,7 +122,7 @@ def root():
     root = customtkinter.CTk()
     customtkinter.set_appearance_mode("System")
     customtkinter.set_default_color_theme("blue")
-    root.title("Y2hlcWFkIHplcmFuZ2kgOkQ=")
+    root.title("SGkgOkQ=")
     root.geometry("660x800")
     root.resizable(width=True, height=True)
     first = "N U C "
