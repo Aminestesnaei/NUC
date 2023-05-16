@@ -140,7 +140,7 @@ def root():
     root.resizable(width=False, height=False)
     first = "N U C "
     firsta = Label(root, text=first, font=("", 20))
-    firsta.place(x=250, y=10)
+    firsta.place(x=300, y=10)
 
     text_to_encode = "To Encode and Decode :"
     a = Label(root, text=text_to_encode, font=("irjadid", 15))
