@@ -9,7 +9,6 @@ customtkinter.set_appearance_mode("System")
 
 
 def encode():
-
     out_text64.delete(1.0, END)
     out_text58.delete(1.0, END)
     out_text256.delete(1.0, END)
@@ -30,21 +29,34 @@ def decode():
     global text_decoded
     global img_f
     global image
-    
+
     encoded_text = out_text64.get(1.0, END)
-    encoded_text.encode()
-    text_decoded = base64.b64decode(encoded_text).decode()
-    out_text64.delete(1.0, END)
-    out_text64.insert('insert', text_decoded)
+    try:
 
+        encoded_text.encode()
+        text_decoded = base64.b64decode(encoded_text).decode()
 
-def decode_base58():
+    
+        out_text64.delete(1.0, END)
+        out_text64.insert('insert', text_decoded)
 
+    except:
+        out_text64.delete(1.0, END)
+        out_text64.insert('insert', "Error : that was not Type of base64 ")        
+
+def decode_base58(): 
+    
     encoded_text = out_text58.get(1.0, END)
-    encoded_text.encode()
-    text_decoded58 = base58.b58decode(encoded_text).decode()
-    out_text58.delete(1.0, END)
-    out_text58.insert('insert', text_decoded58)
+    try:
+
+        encoded_text.encode()
+        text_decoded58 = base58.b58decode(encoded_text).decode()
+        out_text58.delete(1.0, END)
+        out_text58.insert('insert', text_decoded58)
+    except:
+        out_text58.delete(1.0, END)
+        out_text58.insert('insert', "ERROR : That was not Type of Base58")
+
 
 
 def clear_in():
@@ -91,6 +103,7 @@ def copy_button256():
 def decode256():
     messagebox.showinfo("ERROR", "SHA 256 is one way compression ")
 
+
 def paste58():
     global out_text58
     kb58 = Tk()
@@ -124,7 +137,7 @@ def root():
     customtkinter.set_default_color_theme("blue")
     root.title("SGkgOkQ=")
     root.geometry("660x800")
-    root.resizable(width=True, height=True)
+    root.resizable(width=False, height=False)
     first = "N U C "
     firsta = Label(root, text=first, font=("", 20))
     firsta.place(x=250, y=10)
@@ -145,28 +158,28 @@ def root():
     sha256 = Label(root, text=text_sha256, font=("irjadid", 15))
     sha256.place(x=20, y=620)
 
-#    Buttons
+    #    Buttons
 
-    en_btn = customtkinter.CTkButton(master=root,text="Encode to All !", corner_radius=10,height=1, command=encode,)
+    en_btn = customtkinter.CTkButton(master=root, text="Encode to All !", corner_radius=10, height=1, command=encode, )
     en_btn.pack()
     en_btn.place(x=500, y=129)
-    de_btn = customtkinter.CTkButton(text="Decode 64", corner_radius=10,height=1, command=decode,)
+    de_btn = customtkinter.CTkButton(text="Decode 64", corner_radius=10, height=1, command=decode, )
     de_btn.pack()
     de_btn.place(x=500, y=415)
-    de58_btn = customtkinter.CTkButton(text="Decode 58", corner_radius=10,height=1, command=decode_base58)
+    de58_btn = customtkinter.CTkButton(text="Decode 58", corner_radius=10, height=1, command=decode_base58)
     de58_btn.pack()
     de58_btn.place(x=500, y=545)
-    de256_btn = customtkinter.CTkButton(text="Decode 256", corner_radius=10,height=1, command=decode256)
+    de256_btn = customtkinter.CTkButton(text="Decode 256", corner_radius=10, height=1, command=decode256)
     de256_btn.pack()
-    de256_btn.place(x=500, y=705)
-    clearin = customtkinter.CTkButton(text="Clear", corner_radius=10, height=50, width=150,  command=clear_in,)
+    de256_btn.place(x=500, y=675)
+    clearin = customtkinter.CTkButton(text="Clear", corner_radius=10, height=50, width=150, command=clear_in, )
     clearin.place(x=300, y=270)
-    copy_btn = customtkinter.CTkButton(text="Copy ", corner_radius=10,height=1, command=copy_button64,)
+    copy_btn = customtkinter.CTkButton(text="Copy ", corner_radius=10, height=1, command=copy_button64, )
     copy_btn.place(x=500, y=445)
-    copy_btn = customtkinter.CTkButton(text="Copy ", corner_radius=10,height=1, command=copy_button58,)
+    copy_btn = customtkinter.CTkButton(text="Copy ", corner_radius=10, height=1, command=copy_button58, )
     copy_btn.place(x=500, y=575)
-    copy_btn = customtkinter.CTkButton(text="Copy ", corner_radius=10,height=1, command=copy_button256,)
-    copy_btn.place(x=500, y=675)
+    copy_btn = customtkinter.CTkButton(text="Copy ", corner_radius=10, height=1, command=copy_button256, )
+    copy_btn.place(x=500, y=705)
     paste_btn = customtkinter.CTkButton(text="Paste", corner_radius=10, height=50, width=150, command=paste_button)
     paste_btn.place(x=70, y=270)
     paste_btn = customtkinter.CTkButton(text="Paste", corner_radius=10, height=1, width=150, command=paste64)
@@ -189,6 +202,7 @@ def root():
     out_text256.pack()
     out_text256.place(x=32, y=665)
     root.mainloop()
+
 
 customtkinter.set_appearance_mode("System")
 customtkinter.set_default_color_theme("blue")
